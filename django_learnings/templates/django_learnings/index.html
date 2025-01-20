@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Django Learning</title>
+</head>
+<body>
+    {% extends "django_learnings/base.html" %}
+
+    {% block header %}
+        <div class="jumbotron">
+            <h1>Track your learning</h1>
+        </div>
+    {% endblock header %}
+
+    {% block content %}
+    {% if user.is_authenticated %}
+        <h2>
+            Make a note summarizing what you have learned.
+        </h2>
+    {% else %}
+        <h2>
+            <a href="{% url 'register' %}">Create an account</a> 
+            to use Django Learning and type in the topics you are learning
+        </h2>
+        <h2>
+            Make a note summarizing what you have learned.
+        </h2>
+    {% endif %}
+    
+    {% endblock content %}
+</body>
+</html>
