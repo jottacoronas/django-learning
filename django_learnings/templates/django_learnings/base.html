@@ -1,0 +1,71 @@
+{% load bootstrap3 %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="keywords" content="notes, documents">
+    <title>Base Learning</title>
+
+    {% bootstrap_css %}
+    {% bootstrap_javascript %}
+    <style>
+        .ul-none ul{
+            display: none;
+        }
+
+        
+        .help-block{
+            display: none;
+        }
+    </style>
+</head>
+<body>
+    <nav class="navbar navbar-default navbar-static-top">
+        <div class="container">
+            <div class="navbar-header">
+                <button 
+                type="button" 
+                class="navbar-toggle collapsed" 
+                data-toggle="collapse" 
+                data-target="#navbar"
+                aria-expanded="false"
+                >
+                </button>
+                <a href="{% url 'index' %}" class="navbar-brand">Django Learning</a> 
+            </div>
+            
+            <div class="collapse navbar-collapse" id="navbar">
+                <ul class="nav navbar-nav">
+                    <li>
+                        <a href="{% url 'topics' %}">Topics</a> 
+                    </li>
+                </ul>
+                <ul class="nav navbar-nav navbar-right">
+                    {% if user.is_authenticated %}
+                        <li>
+                            <a>Hello, {{ user.username }}!</a>
+                        </li>
+                        <li><a href="{% url 'logout' %}">Logout</a></li>
+                    {% else %}
+                        <li><a href="{% url 'register' %}">Register</a></li>
+                        <li><a href="{% url 'login' %}">Login</a></li>
+                    {% endif %}
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <div class="container">
+        <div class="page-header">
+            {% block header %}{% endblock header %}
+        </div>
+        <div>
+            {% block content %}{% endblock content %}
+        </div>
+    </div>
+
+</body>
+</html>
