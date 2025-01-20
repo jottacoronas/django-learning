@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login</title>
+</head>
+<body>
+    {% extends "django_learnings/base.html" %}
+        {% load bootstrap3 %}
+            {% block header %}
+                <h2>Login to your account</h2>
+            {% endblock header %}
+        {% block content %}
+            {% if form.errors %}
+                <p>Credentials are wrong. Please enter them again.</p>
+            {% endif %}
+
+            <form action="{% url 'login' %}" method="post" class="form">
+                {% csrf_token %}
+                {% bootstrap_form form %}
+                
+                {% buttons %}
+                    <button name="submit" class="btn btn-primary">Login</button>
+                {% endbuttons %}
+                <input type="hidden" name="next" value="{% url 'index' %}">
+            </form>
+        {% endblock content %}
+
+</body>
+</html>
